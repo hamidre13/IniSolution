@@ -5,7 +5,7 @@
         "eslint:react/recomended",
         "eslint:jsx-a11y/recomended",
         "prettier",
-       "prettier/react"
+        "prettier/react"
     ],
     "rules": {
         "react/prop-types":0,
