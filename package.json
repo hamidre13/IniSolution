@@ -14,9 +14,15 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "@types/googlemaps": "^3.0.0",
+    "@types/markerclustererplus": "^2.1.29",
+    "@types/react": "^15.0.0 || ^16.0.0",
     "axios": "^0.18.0",
-    "react": "15.x || 16.x || 16.4.0-alpha.0911da3",
-    "react-dom": "15.x || 16.x || 16.4.0-alpha.0911da3",
+    "google-map-react": "^1.1.4",
+    "prop-types": "^15.5.6",
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-google-maps": "^9.4.5",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
