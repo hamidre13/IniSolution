@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "@reach/router";
 
 const ListWrapper = styled.div`
   color: blue;
@@ -10,7 +11,7 @@ const ListWrapper = styled.div`
   align-items: center;
   align-content: center;
 `;
-const PokeWrapper = styled.div`
+const PokeWrapper = styled(Link)`
   flex-basis: 20%;
   margin-bottom: 25px;
 `;
@@ -20,49 +21,28 @@ const ImgCaption = styled.div`
 `;
 const ShowPokes = props => {
   const { pokes, IsSearch } = props;
-  if (!IsSearch) {
-    return (
-      <ListWrapper>
-        {!pokes.length ? (
-          <h1>Loading ....</h1>
-        ) : (
-          pokes.map(poke => (
-            <PokeWrapper key={poke.name}>
-              <ImgCaption>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    poke.index
-                  }.png`}
-                />
-                <p>{poke.name}</p>
-              </ImgCaption>
-            </PokeWrapper>
-          ))
-        )}
-      </ListWrapper>
-    );
-  } else {
-    return (
-      <ListWrapper>
-        {!pokes.length ? (
-          <h1>No Result</h1>
-        ) : (
-          pokes.map(poke => (
-            <PokeWrapper key={poke.name}>
-              <ImgCaption>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    poke.index
-                  }.png`}
-                />
-                <p>{poke.name}</p>
-              </ImgCaption>
-            </PokeWrapper>
-          ))
-        )}
-      </ListWrapper>
-    );
-  }
+  let txtAlert = "Loading ....";
+  if (IsSearch) txtAlert = "No Result";
+  return (
+    <ListWrapper>
+      {!pokes.length ? (
+        <h1>{txtAlert}</h1>
+      ) : (
+        pokes.map(poke => (
+          <PokeWrapper to={`/details/${poke.name}`} key={poke.name}>
+            <ImgCaption>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  poke.index
+                }.png`}
+              />
+              <p>{poke.name}</p>
+            </ImgCaption>
+          </PokeWrapper>
+        ))
+      )}
+    </ListWrapper>
+  );
 };
 
 export default ShowPokes;

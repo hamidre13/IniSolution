@@ -36,7 +36,7 @@ const PokemonList = () => {
         setPokes(pokes);
       });
   }, []);
-  
+
   const toggleMode = opt => {
     setMode(opt);
   };
@@ -52,10 +52,10 @@ const PokemonList = () => {
         temp.push(poke);
       }
     });
-  
+
     setSearchRes(temp);
   };
-  
+
   return (
     <div>
       <SearchContainer>

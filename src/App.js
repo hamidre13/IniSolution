@@ -5,13 +5,11 @@ import PokemonList from "./PokemonList";
 import Details from "./Details";
 
 const App = () => {
-  
-  
   return (
-      <Router>
-        <PokemonList path="/" />
-        <Details path="/details/:id" />
-      </Router>
+    <Router>
+      <PokemonList path="/" />
+      <Details path="/details/:id" />
+    </Router>
   );
 };
 ReactDOM.render(<App />, document.getElementById("root"));
