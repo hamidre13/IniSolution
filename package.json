@@ -8,12 +8,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "clean-dev": "rm -rf .cache/ dist/"
   },
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "15.x || 16.x || 16.4.0-alpha.0911da3",
+    "react-dom": "15.x || 16.x || 16.4.0-alpha.0911da3",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
