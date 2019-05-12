@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "dev": "parcel src/index.html",
-    "clean-dev": "rm -rf .cache/ dist/"
+    "clean-dev": "rm -rf .cache/ dist/",
+    "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
