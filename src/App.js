@@ -1,3 +1,4 @@
+import './css/style.css'
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Router, Link } from "@reach/router";

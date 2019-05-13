@@ -72,29 +72,30 @@ class Details extends React.Component {
         this.setState({
           poke: res.data,
           url: res.data.sprites.front_default,
-          saved: saved,
-          locations:[
-            "32.734778,-117.152630",
-            "32.734196,-117.139709",
-            "32.833744,-117.067149",
-            "32.819219,-117.029244",
-            "32.907707,-116.797917"
-        ]
+          saved: saved
+        //   locations:[
+        //     "32.734778,-117.152630",
+        //     "32.734196,-117.139709",
+        //     "32.833744,-117.067149",
+        //     "32.819219,-117.029244",
+        //     "32.907707,-116.797917"
+        // ]
         });
       });
 
-    // axios
-    //   .get(`https://api.craft-demo.net/pokemon/${this.props.id}`, {
-    //     method: "GET",
+    axios
+      .get(`https://api.craft-demo.net/pokemon/${this.props.id}`, {
+        method: "GET",
 
-    //     headers: {
-    //       "x-api-key": process.env.API_KEY,
-    //       "Access-Control-Allow-Origin": "*"
-    //     }
-    //   })
-    //   .then(loc => {
-    //     this.setState({locations: loc.data.locations});
-    //   });
+        headers: {
+          "x-api-key": process.env.API_KEY,
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
+      .then(loc => {
+        this.setState({locations: loc.data.locations});
+      });
+      
   }
   handleSave = e => {
     if (e.target.checked) {

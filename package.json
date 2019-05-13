@@ -8,13 +8,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "webpack-dev-server": "webpack-dev-server",
     "webpack:dev": "yarn webpack-dev-server --env.mode development --hot",
     "prod": "yarn webpack --env.mode production",
     "prod:analyze": "yarn prod --env.presets analyze",
     "clean-dev": "rm -rf .cache/ dist/",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage":"jest --coverage",
+    "test:coverage": "jest --coverage",
     "format": "prettier --write \"src/**/*.{js,jsx,json}\"",
     "dev": "parcel src/index.html"
   },
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.4",
@@ -41,6 +41,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "dotenv-webpack": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-loader": "^2.1.1",
