@@ -25,15 +25,14 @@ const PokemonList = () => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151")
       .then(({ data }) => {
-        //console.log(data.results)
         const res = data.results;
-
         const pokes = res.map((poke, index) => {
           return {
-            index: index,
+            index: index + 1,
             name: poke.name
           };
         });
+
         setPokes(pokes);
       });
 

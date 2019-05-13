@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  waitForElement
-} from "react-testing-library";
+import { render, cleanup, waitForElement } from "react-testing-library";
 import PokemonList from "../PokemonList";
 
 import { readFileSync } from "fs";
@@ -12,7 +7,9 @@ import path from "path";
 import { Exception } from "handlebars";
 
 const pokes = JSON.parse(readFileSync(path.join(__dirname, "/res.json")));
+
 afterEach(cleanup);
+
 describe("Testing the functionality of main page", () => {
   test("Pokemon List items", async () => {
     const { container, getByTestId, getByText } = render(<PokemonList />);

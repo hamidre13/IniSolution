@@ -1,15 +1,15 @@
 {
     "extends": [
         "eslint:recommended",
-        "eslint:import/errors",
-        "eslint:react/recomended",
-        "eslint:jsx-a11y/recomended",
+        "plugin:import/errors",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
         "prettier",
         "prettier/react"
     ],
     "rules": {
         "react/prop-types":0,
-        "react-hooks/tules-of-hooks":"error",
+        "react-hooks/rules-of-hooks":"error",
         "no-console":"warn"
     },
     "parser": "babel-eslint",

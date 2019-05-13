@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import {
@@ -64,43 +64,29 @@ class Details extends React.Component {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
       .then(res => {
-        console.log(res.data);
         let saved = false;
+
         if (localStorage.getItem(res.data.name)) {
           saved = true;
         }
         this.setState({
           poke: res.data,
           url: res.data.sprites.front_default,
-          saved: saved,
-          locations: [
-            "32.734778,-117.152630",
-            "32.734196,-117.139709",
-            "32.833744,-117.067149",
-            "32.819219,-117.029244",
-            "32.907707,-116.797917"
-          ]
+          saved: saved
         });
+      });
 
-        // if(poke.id){
+    axios
+      .get(`https://api.craft-demo.net/pokemon/${this.props.id}`, {
+        method: "GET",
 
-        //     axios
-        //     .get(`https://api.craft-demo.net/pokemon/${poke.id}`, {
-        //       method: 'GET',
-        //       mode: 'no-cors',
-        //         headers: {
-        //             "x-api-key": process.env.API_KEY,
-        //             "Access-Control-Allow-Origin": "*",
-        //             "Access-Control-Allow-Methods": "GET,POST",
-        //             'Content-Type': 'application/json',
-        //           },
-        //           withCredentials: true,
-        //           credentials: 'same-origin',
-        //       })
-        //       .then(loc => {
-        //           console.log(loc);
-        //       });
-        //   }
+        headers: {
+          "x-api-key": process.env.API_KEY,
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
+      .then(loc => {
+        this.setState({locations: loc.data.locations});
       });
   }
   handleSave = e => {
@@ -124,7 +110,7 @@ class Details extends React.Component {
             <DetailsLeft>
               <PokeWrapper key={poke.name}>
                 <ImgCaption>
-                  <img src={url} />
+                  <img src={url} alt="Pokemon" />
                   <p>{poke.name}</p>
                 </ImgCaption>
                 <p>

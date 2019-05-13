@@ -32,22 +32,24 @@ const ShowPokes = props => {
   } else {
     return (
       <ListWrapper data-testid="poke-container">
-        
         {pokes.map(poke => (
-        <PokeWrapper to={`/details/${poke.name}`} key={poke.name}>
-          <ImgCaption>
-            <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                poke.index
-              }.png`}
-            />
-            <p>{poke.name}</p>
-          </ImgCaption>
-        </PokeWrapper>
+          <PokeWrapper
+            to={`/details/${poke.index}`}
+            key={poke.name}
+          >
+            <ImgCaption>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  poke.index
+                }.png`}
+                alt="Pokemon"
+              />
+              <p>{poke.name}</p>
+            </ImgCaption>
+          </PokeWrapper>
         ))}
-
       </ListWrapper>
-    )
+    );
   }
 };
 
