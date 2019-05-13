@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { GoogleMap, Marker, withGoogleMap,withScriptjs } from "react-google-maps";
+import {
+  GoogleMap,
+  Marker,
+  withGoogleMap,
+  withScriptjs
+} from "react-google-maps";
 
 const DetailsWrapper = styled.div`
   display: flex;
@@ -25,39 +30,49 @@ const ImgCaption = styled.div`
   text-align: center;
   padding: 10px 20px;
 `;
-const MapWithMarker = withScriptjs (withGoogleMap(props => (
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: 32.724143, lng: -117.137424 }}
-  >
-    {props.locations.length
-      ? props.locations.map(loc => (
-          <Marker
-            position={{
-              lat: +loc.split(",")[0],
-              lng: +loc.split(",")[1]
-            }}
-          />
-        ))
-      : null}
-  </GoogleMap>
-)));
+const MapWithMarker = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap
+      defaultZoom={8}
+      defaultCenter={{ lat: 32.724143, lng: -117.137424 }}
+    >
+      {props.locations.length
+        ? props.locations.map(loc => (
+            <Marker
+              key={loc}
+              position={{
+                lat: +loc.split(",")[0],
+                lng: +loc.split(",")[1]
+              }}
+            />
+          ))
+        : null}
+    </GoogleMap>
+  ))
+);
 class Details extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       poke: [],
       url: "",
-      locations: []
+      locations: [],
+      saved :false
     };
   }
   componentDidMount() {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
       .then(res => {
+        console.log(res.data);
+        let saved =false
+        if(localStorage.getItem(res.data.name)){
+            saved = true
+        }
         this.setState({
           poke: res.data,
           url: res.data.sprites.front_default,
+          saved:saved,
           locations: [
             "32.734778,-117.152630",
             "32.734196,-117.139709",
@@ -66,12 +81,20 @@ class Details extends React.Component {
             "32.907707,-116.797917"
           ]
         });
-        
       });
   }
-
+  handleSave = e => {
+    if(e.target.checked){
+        //assumming that there will be support for local storage
+        localStorage.setItem(this.state.poke.name,this.state.poke.id)
+        this.setState({saved:true})
+    } else {
+        localStorage.removeItem(this.state.poke.name)
+        this.setState({saved:false})
+    }
+  };
   render() {
-    const { poke, url, locations } = this.state;
+    const { poke, url, locations,saved } = this.state;
     return (
       <React.Fragment>
         {!poke ? (
@@ -92,7 +115,7 @@ class Details extends React.Component {
                   <br />
                   <br />
                   In Bag:
-                  <input type="checkbox" />
+                  <input type="checkbox" onChange={this.handleSave} checked={saved}/>
                   <br />
                   <br />
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -113,16 +136,28 @@ class Details extends React.Component {
                   Malesuada fames ac turpis egestas maecenas. Varius quam
                   quisque id diam.
                 </p>
+                {poke.abilities ? (
+                  <React.Fragment>
+                    <h2>Abilities</h2>
+                    <ul>
+                      {poke.abilities.map(ab => (
+                        <li key={ab.ability.name}>{ab.ability.name}</li>
+                      ))}
+                    </ul>
+                  </React.Fragment>
+                ) : null}
               </PokeWrapper>
             </DetailsLeft>
-            <DetailsRight>{/* { key: process.env.MAPS_API } */}
-            <MapWithMarker
-            locations ={locations}
-  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPS_API}&v=3.exp&libraries=geometry,drawing,places`}
-  loadingElement={<div style={{ height: `100%` }} />}
-  containerElement={<div style={{ height: `400px` }} />}
-  mapElement={<div style={{ height: `100%` }} />}
-/>
+            <DetailsRight>
+              <MapWithMarker
+                locations={locations}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
+                  process.env.MAPS_API
+                }&v=3.exp&libraries=geometry,drawing,places`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+              />
             </DetailsRight>
           </DetailsWrapper>
         )}

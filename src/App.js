@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Router, Link } from "@reach/router";
 import PokemonList from "./PokemonList";
-import Details from "./Details";
+
+const Details = lazy(() => import("./Details"));
 
 const App = () => {
   return (
-    <Router>
-      <PokemonList path="/" />
-      <Details path="/details/:id" />
-    </Router>
+    <Suspense fallback={<h1>loading route …</h1>}>
+      <Router>
+        <PokemonList path="/" />
+        <Details path="/details/:id" />
+      </Router>
+    </Suspense>
   );
 };
 ReactDOM.render(<App />, document.getElementById("root"));
