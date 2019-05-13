@@ -9,15 +9,15 @@ const pokes = JSON.parse(readFileSync(path.join(__dirname, "/res.json")));
 afterEach(cleanup);
 
 describe("Testing details page functionality", () => {
-  xtest("Detail page id and name should match the id and name of the url", async () => {
+  test("Detail page id and name should match the id and name of the url", async () => {
     const name = "pidgeotto";
     const id = "17";
     const { getByTestId } = render(<Details name={name} id={id} />);
     const resName = await waitForElement(() => getByTestId("detail-name"));
-    console.log(resName.innerHTML);
-    expect(resName.text()).toBe(name);
+    
+    expect(resName.textContent).toMatch(name);
   });
-  test("Detail page general structure", async () => {
+  xtest("Detail page general structure", async () => {
     const name = "pidgeotto";
     const id = "17";
     const { container } = render(<Details name={name} id={id} />);
