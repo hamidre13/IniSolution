@@ -5,14 +5,13 @@ import PokemonList from "../PokemonList";
 import { readFileSync } from "fs";
 import path from "path";
 
-
 const pokes = JSON.parse(readFileSync(path.join(__dirname, "/res.json")));
 
 afterEach(cleanup);
 
 describe("Testing the functionality of main page", () => {
   test("Pokemon List items", async () => {
-    const {  getByTestId } = render(<PokemonList />);
+    const { getByTestId } = render(<PokemonList />);
     const AllPoke = await waitForElement(() => getByTestId("poke-container"));
     expect(AllPoke.children.length).toEqual(pokes.results.length);
   });

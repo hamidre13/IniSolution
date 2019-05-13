@@ -14,7 +14,7 @@ describe("Testing details page functionality", () => {
     const id = "17";
     const { getByTestId } = render(<Details name={name} id={id} />);
     const resName = await waitForElement(() => getByTestId("detail-name"));
-    
+
     expect(resName.textContent).toMatch(name);
   });
   xtest("Detail page general structure", async () => {
