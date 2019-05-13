@@ -20,7 +20,7 @@ const PokemonList = () => {
   const [pokes, setPokes] = useState({});
   const [mode, setMode] = useState("Show All");
   const [searchRes, setSearchRes] = useState("");
-  const [local,setLocal] = useState([])
+  const [local, setLocal] = useState([]);
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151")
@@ -36,18 +36,17 @@ const PokemonList = () => {
         });
         setPokes(pokes);
       });
-    
-      const LocalKeys = Object.keys(localStorage)
-      let i = LocalKeys.length
-      let temp = []
-      while (i--){
-        temp.push({
-         name:LocalKeys[i],
-         index:localStorage.getItem(LocalKeys[i]) 
-        })
-      }
-      setLocal(temp)
-      
+
+    const LocalKeys = Object.keys(localStorage);
+    let i = LocalKeys.length;
+    let temp = [];
+    while (i--) {
+      temp.push({
+        name: LocalKeys[i],
+        index: localStorage.getItem(LocalKeys[i])
+      });
+    }
+    setLocal(temp);
   }, []);
 
   const toggleMode = opt => {
@@ -85,10 +84,7 @@ const PokemonList = () => {
       {mode === "Show Seach" ? (
         <ShowPokes pokes={searchRes} IsSearch={true} />
       ) : null}
-      {mode === "Show Save"?
-    (
-      <ShowPokes pokes={local}/>
-    ):null  }
+      {mode === "Show Save" ? <ShowPokes pokes={local} /> : null}
     </div>
   );
 };

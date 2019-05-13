@@ -57,7 +57,7 @@ class Details extends React.Component {
       poke: [],
       url: "",
       locations: [],
-      saved :false
+      saved: false
     };
   }
   componentDidMount() {
@@ -65,14 +65,14 @@ class Details extends React.Component {
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.id}`)
       .then(res => {
         console.log(res.data);
-        let saved =false
-        if(localStorage.getItem(res.data.name)){
-            saved = true
+        let saved = false;
+        if (localStorage.getItem(res.data.name)) {
+          saved = true;
         }
         this.setState({
           poke: res.data,
           url: res.data.sprites.front_default,
-          saved:saved,
+          saved: saved,
           locations: [
             "32.734778,-117.152630",
             "32.734196,-117.139709",
@@ -81,20 +81,40 @@ class Details extends React.Component {
             "32.907707,-116.797917"
           ]
         });
+
+        // if(poke.id){
+
+        //     axios
+        //     .get(`https://api.craft-demo.net/pokemon/${poke.id}`, {
+        //       method: 'GET',
+        //       mode: 'no-cors',
+        //         headers: {
+        //             "x-api-key": process.env.API_KEY,
+        //             "Access-Control-Allow-Origin": "*",
+        //             "Access-Control-Allow-Methods": "GET,POST",
+        //             'Content-Type': 'application/json',
+        //           },
+        //           withCredentials: true,
+        //           credentials: 'same-origin',
+        //       })
+        //       .then(loc => {
+        //           console.log(loc);
+        //       });
+        //   }
       });
   }
   handleSave = e => {
-    if(e.target.checked){
-        //assumming that there will be support for local storage
-        localStorage.setItem(this.state.poke.name,this.state.poke.id)
-        this.setState({saved:true})
+    if (e.target.checked) {
+      //assumming that there will be support for local storage
+      localStorage.setItem(this.state.poke.name, this.state.poke.id);
+      this.setState({ saved: true });
     } else {
-        localStorage.removeItem(this.state.poke.name)
-        this.setState({saved:false})
+      localStorage.removeItem(this.state.poke.name);
+      this.setState({ saved: false });
     }
   };
   render() {
-    const { poke, url, locations,saved } = this.state;
+    const { poke, url, locations, saved } = this.state;
     return (
       <React.Fragment>
         {!poke ? (
@@ -115,7 +135,11 @@ class Details extends React.Component {
                   <br />
                   <br />
                   In Bag:
-                  <input type="checkbox" onChange={this.handleSave} checked={saved}/>
+                  <input
+                    type="checkbox"
+                    onChange={this.handleSave}
+                    checked={saved}
+                  />
                   <br />
                   <br />
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
