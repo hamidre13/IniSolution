@@ -34,7 +34,7 @@ const ShowPokes = props => {
       <ListWrapper data-testid="poke-container">
         {pokes.map(poke => (
           <PokeWrapper
-            to={`/details/${poke.index}`}
+            to={`/details/${poke.index}/${poke.name}`}
             key={poke.name}
           >
             <ImgCaption>

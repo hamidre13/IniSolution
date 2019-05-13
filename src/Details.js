@@ -111,7 +111,7 @@ class Details extends React.Component {
               <PokeWrapper key={poke.name}>
                 <ImgCaption>
                   <img src={url} alt="Pokemon" />
-                  <p>{poke.name}</p>
+                  <p data-testid="detail-name">{poke.name}</p>
                 </ImgCaption>
                 <p>
                   Height: {poke.height}

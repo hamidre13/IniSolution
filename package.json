@@ -8,15 +8,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn webpack-dev-server --env.mode development --hot",
+    "webpack:dev": "yarn webpack-dev-server --env.mode development --hot",
     "prod": "yarn webpack --env.mode production",
     "prod:analyze": "yarn prod --env.presets analyze",
     "clean-dev": "rm -rf .cache/ dist/",
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --write \"src/**/*.{js,jsx,json}\"",
-    "parcel": "parcel src/index.html"
-    
+    "dev": "parcel src/index.html"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
@@ -33,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.4",
